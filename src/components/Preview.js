@@ -1,6 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { Title } from "../styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Title } from '../styles';
 
 const Container = styled.div`
   text-align: center;
@@ -19,13 +20,17 @@ const LinkContainer = styled.div`
   }
 `;
 
-const Preview = ({ text, styles }) => (
+const Preview = ({ text }) => (
   <Container>
     <Title>Preview</Title>
     <LinkContainer>
-      <a href="">{text}</a>
+      <a>{text}</a>
     </LinkContainer>
   </Container>
 );
+
+Preview.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 export default Preview;

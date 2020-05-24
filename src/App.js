@@ -7,11 +7,17 @@ import './App.css';
 function App() {
   return (
     <>
-          <Header />
+      <Header />
       <div className="flex flex-wrap">
-        <div className="w-full sm:w-full md:w-1/2 mb-4"><Preview text="Hello world!" /></div>
-        <div className="w-full sm:w-full md:w-1/2 mb-4">2</div>
-        <div className="w-full p-2 bg-gray-200"><Data /></div>
+        <div className="w-full sm:w-full md:w-1/2 pb-10">
+          <Preview text="Hello world!" />
+        </div>
+        <div className="w-full sm:w-full md:w-1/2 pd-4 bg-blue-100">
+          GENERATED CODE
+        </div>
+        <div className="w-full p-2 bg-gray-100">
+          <Data />
+        </div>
       </div>
     </>
   );
