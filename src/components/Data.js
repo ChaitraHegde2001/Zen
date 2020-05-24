@@ -1,64 +1,62 @@
-import React from "react";
-import styled from "styled-components";
-import { Title } from "../styles";
-import { Form, Input, Button, InputNumber, Row, Col } from "antd";
+import React from 'react';
+import styled from "@emotion/styled"
 
 const Container = styled.div``;
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-  size: "large"
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 }
-};
-
 const Data = () => (
   <Container>
-    <Title>Data</Title>
-    <Form {...layout} name="basic" initialValues={{ remember: true }}>
-      <Row>
-        <Col>
-          <Form.Item label="InputNumber">
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item label="Password" name="password">
-            <Input />
-          </Form.Item>
-        </Col>
-        <Col>
-          <Form.Item label="InputNumber">
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item label="Password" name="password">
-            <Input />
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Form.Item label="InputNumber">
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item label="Password" name="password">
-            <Input />
-          </Form.Item>
-        </Col>
-        <Col>
-          <Form.Item label="InputNumber">
-            <InputNumber />
-          </Form.Item>
-
-          <Form.Item label="Password" name="password">
-            <Input />
-          </Form.Item>
-        </Col>
-      </Row>
-    </Form>
+      <form className="w-full max-w-lg">
+      <div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label className="block text-blue-800 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
+              Full Name
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input className="bg-gray-200 appearance-none border-2 border-blue-700 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" defaultValue="Jane Doe" />
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-username">
+              Password
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-username" type="password" placeholder="******************" />
+          </div>
+        </div>
+        <div className="md:flex md:items-center">
+          <div className="md:w-1/3" />
+          <div className="md:w-2/3">
+            <button className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+              Sign Up
+            </button>
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
+              Full Name
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" defaultValue="Jane Doe" />
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-username">
+              Password
+            </label>
+          </div>
+          <div className="md:w-2/3">
+            <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-username" type="password" placeholder="******************" />
+          </div>
+        </div>
+      </div>
+      </form>
 
     {/* --underlineScaleX: 1;
   --underlineColor: #ffc600;
@@ -66,6 +64,7 @@ const Data = () => (
   --underlineBottom: 1px;
   --underlineScaleHover: 1.05;
   --underlineRotation: -2deg; */}
+
   </Container>
 );
 
