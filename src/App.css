@@ -3,3 +3,8 @@
 * {
   font-family: "Jost", sans-serif;
 }
+
+input:disabled {
+  opacity: 0.4;
+  background-color: #d2d2d2;
+}

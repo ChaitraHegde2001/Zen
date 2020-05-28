@@ -1,4 +1,5 @@
 import tw from 'tailwind.macro';
+import styled from '@emotion/styled';
 
 const InputDataContainer = tw.div`
   md:flex md:items-center w-full md:w-1/2 lg:w-1/3 mb-4
@@ -18,7 +19,24 @@ const Label = tw.label`
   pr-4
 `;
 
-const Input = tw.input`
+const Input = styled('input')`
+  ${tw`
+  bg-gray-200
+  appearance-none
+  border-2
+  border-blue-700
+  rounded w-full
+  py-2
+  px-4
+  text-gray-700
+  leading-tight
+  focus:outline-none
+  focus:bg-white
+  focus:border-blue-500
+  `}
+`;
+
+const Select = tw.select`
   bg-gray-200
   appearance-none
   border-2
@@ -33,4 +51,5 @@ const Input = tw.input`
   focus:border-blue-500
 `;
 
-export { InputDataContainer, Input, Label, Title };
+// ('block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500');
+export { InputDataContainer, Input, Label, Title, Select };
