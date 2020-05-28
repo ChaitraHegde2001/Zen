@@ -1,7 +1,7 @@
 import React from 'react';
 import Preview from './components/Preview';
 import Header from './components/Header';
-import Data from './components/Data';
+import Data from './components/Data/Data';
 import './App.css';
 
 function App() {
