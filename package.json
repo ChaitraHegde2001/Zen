@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
+    "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@svgr/webpack": "4.3.3",
@@ -57,6 +58,7 @@
     "semver": "6.3.0",
     "style-loader": "0.23.1",
     "styled-components": "^5.1.0",
+    "tailwind.macro": "^1.0.0-alpha.10",
     "tailwindcss": "^1.4.6",
     "terser-webpack-plugin": "2.3.5",
     "ts-pnp": "1.1.6",
@@ -64,8 +66,7 @@
     "webpack": "4.42.0",
     "webpack-dev-server": "3.10.3",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1",
-    "tailwind.macro": "^1.0.0-alpha.10"
+    "workbox-webpack-plugin": "4.3.1"
   },
   "scripts": {
     "build:tailwind": "tailwindcss build src/tailwind.css -o src/tailwind.generated.css",
@@ -155,7 +156,8 @@
   },
   "babel": {
     "presets": [
-      "react-app"
+      "react-app",
+      "@emotion/babel-preset-css-prop"
     ]
   }
 }
