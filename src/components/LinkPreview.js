@@ -6,7 +6,7 @@ import { cssGenerator } from '../utils/cssGenerator';
 const Container = styled.div`
   height: 100%;
   text-align: center;
-  padding: 12px;
+  padding: 30px 0px 0px 0px;
 `;
 
 const ButtonContainer = styled.div`
