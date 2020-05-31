@@ -3,6 +3,7 @@ import { SliderPicker } from 'react-color';
 import Preview from './components/LinkPreview';
 import Header from './components/Header';
 import constants from './constants';
+import { cssGenerator } from './utils/cssGenerator';
 import {
   Title,
   InputDataContainer,
@@ -36,6 +37,19 @@ function App() {
       constants.textDecorationTypes.customStyle,
     ].indexOf(textDecoration) >= 0;
 
+  const generatedCode = cssGenerator(
+    scale,
+    rotation,
+    color,
+    fontSize,
+    textDecoration,
+    lineHeight,
+    underlineColor,
+    bottom,
+    scaleHover,
+    includesCustomStyles
+  );
+
   return (
     <>
       <Header />
@@ -68,35 +82,9 @@ function App() {
         <div className="code-preview w-full sm:w-full md:w-1/2 pd-4">
           <pre className="code code-css rounded-lg">
             <code id="code">
-              {`
-              a {
-                --scaleX: ${scale};
-                --rotate: ${rotation}deg;
-                color: ${color};
-                font-size: ${fontSize}px;
-                text-decoration: underline;
-                position: relative;
-                cursor: pointer;
-              }
-
-              &:hover {
-                --scaleX: ${scaleHover};
-              }
-
-              a {
-                --scaleX: ${scale};
-                --rotate: ${rotation}deg;
-                color: ${color};
-                font-size: ${fontSize}px;
-                text-decoration: underline;
-                position: relative;
-                cursor: pointer;
-              }
-
-              &:hover {
-                --scaleX: ${scaleHover};
-              }
-              `}
+              {`a {${generatedCode}
+}
+             `}
             </code>
           </pre>
         </div>

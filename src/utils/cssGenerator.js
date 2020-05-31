@@ -1,5 +1,30 @@
-export const cssGenerator = {scale, rotation, color, fontSize, textDecoration, lineHeight, underlineColor, bottom, scaleHover, customStyle} => {
-  let customStyle = "";
+import constants from '../constants';
+
+export const getTextDecoration = decoration => {
+  switch (decoration) {
+    case constants.textDecorationTypes.underline:
+    case constants.textDecorationTypes.underlineCustomStyle:
+      return 'underline';
+    case constants.textDecorationTypes.wavy:
+      return 'underline wavy';
+    default:
+      return 'none';
+  }
+};
+
+export const cssGenerator = (
+  scale,
+  rotation,
+  color,
+  fontSize,
+  textDecoration,
+  lineHeight,
+  underlineColor,
+  bottom,
+  scaleHover,
+  customStyles
+) => {
+  let customStyle = '';
 
   if (customStyles) {
     customStyle = `
@@ -21,7 +46,6 @@ export const cssGenerator = {scale, rotation, color, fontSize, textDecoration, l
   }
 
   const css = `
-  a {
     --scaleX: ${scale};
     --rotate: ${rotation}deg;
 
@@ -30,10 +54,7 @@ export const cssGenerator = {scale, rotation, color, fontSize, textDecoration, l
     text-decoration: ${getTextDecoration(textDecoration)};
     position: relative;
     cursor: pointer;
+    ${customStyle}`;
 
-    ${customStyle}
-  }
-`;
-  console.log(css);
   return css;
 };

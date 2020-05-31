@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import propTypes from 'prop-types';
-import { css } from '@emotion/core';
-import constants from '../constants';
+import { cssGenerator } from '../utils/cssGenerator';
 
 const Container = styled.div`
   height: 100%;
@@ -25,18 +24,6 @@ const LinkContainer = styled.div`
   justify-content: center;
 `;
 
-const getTextDecoration = decoration => {
-  switch (decoration) {
-    case constants.textDecorationTypes.underline:
-    case constants.textDecorationTypes.underlineCustomStyle:
-      return 'underline';
-    case constants.textDecorationTypes.wavy:
-      return 'underline wavy';
-    default:
-      return 'none';
-  }
-};
-
 const Preview = ({
   text,
   fontSize,
@@ -51,39 +38,21 @@ const Preview = ({
   customStyles,
   children,
 }) => {
-  let customStyle = null;
-  if (customStyles) {
-    customStyle = `&:before {
-      position: absolute;
-      content: '';
-      width: 100%;
-      z-index: -1;
-      transition: transform 0.1s;
-      height: ${lineHeight}px;
-      background: ${underlineColor};
-      bottom: ${bottom}px;
-      transform: skew(-20deg) rotate(var(--rotate)) scaleX(var(--scaleX));
-    }
-
-    &:hover {
-      --scaleX: ${scaleHover};
-    }`;
-  }
-  const dynamicStyles = () => css`
-    --scaleX: ${scale};
-    --rotate: ${rotation}deg;
-
-    color: ${color};
-    font-size: ${fontSize}px;
-    text-decoration: ${getTextDecoration(textDecoration)};
-    position: relative;
-    cursor: pointer;
-
-    ${customStyle}
-  `;
+  const styles = cssGenerator(
+    scale,
+    rotation,
+    color,
+    fontSize,
+    textDecoration,
+    lineHeight,
+    underlineColor,
+    bottom,
+    scaleHover,
+    customStyles
+  );
 
   const Link = styled.a`
-    ${dynamicStyles}
+    ${styles}
   `;
 
   return (
@@ -97,6 +66,7 @@ const Preview = ({
     </Container>
   );
 };
+
 Preview.propTypes = {
   text: propTypes.string.isRequired,
   fontSize: propTypes.number.isRequired,
