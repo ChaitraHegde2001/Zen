@@ -5,10 +5,12 @@ import { css } from '@emotion/core';
 import constants from '../constants';
 
 const Container = styled.div`
+  height: 100%;
   text-align: center;
 `;
 
 const LinkContainer = styled.div`
+  margin-top: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
