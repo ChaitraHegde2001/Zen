@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { SliderPicker } from 'react-color';
 import Preview from './components/LinkPreview';
 import Header from './components/Header';
 import constants from './constants';
@@ -16,20 +17,24 @@ function App() {
   // General settings
   const [text, setText] = useState('Hello World!');
   const [fontSize, setFontSize] = useState(35);
+  const [color, setColor] = useState('#2774c3');
 
   // Underline settings
   const [textDecoration, setTextDecoration] = useState(
     constants.textDecoration.underline
   );
-  const [scale, setScale] = useState(1);
-  const [underlineColor, setUnderlineColor] = useState('black');
-  const [lineHeight, setLineHeight] = useState(0);
-  const [bottom, setBottom] = useState(0);
-  const [scaleHover, setScaleHover] = useState(1);
-  const [rotation, setRotation] = useState(0);
+  const [scale, setScale] = useState(1.05);
+  const [underlineColor, setUnderlineColor] = useState('#ecb12c');
+  const [lineHeight, setLineHeight] = useState(4);
+  const [bottom, setBottom] = useState(2);
+  const [scaleHover, setScaleHover] = useState(1.15);
+  const [rotation, setRotation] = useState(-2);
 
-  const includesTextDecoration =
-    textDecoration !== constants.textDecoration.none;
+  const includesCustomStyles =
+    [
+      constants.textDecorationTypes.underlineCustomStyle,
+      constants.textDecorationTypes.customStyle,
+    ].indexOf(textDecoration) >= 0;
 
   return (
     <>
@@ -47,6 +52,8 @@ function App() {
             lineHeight={lineHeight}
             bottom={bottom}
             rotation={rotation}
+            color={color}
+            customStyles={includesCustomStyles}
           />
         </div>
 
@@ -101,7 +108,7 @@ function App() {
                   </Label>
                 </div>
                 <div className="md:w-2/3">
-                  <Input id="font-size" type="number" defaultValue="16" />
+                  <SliderPicker color={color} onChange={c => setColor(c.hex)} />
                 </div>
               </InputDataContainer>
             </div>
@@ -123,15 +130,11 @@ function App() {
                       value={textDecoration}
                       onChange={e => setTextDecoration(e.target.value)}
                     >
-                      <option value={constants.textDecoration.underline}>
-                        Line
-                      </option>
-                      <option value={constants.textDecoration.wavy}>
-                        Wavy
-                      </option>
-                      <option value={constants.textDecoration.none}>
-                        None
-                      </option>
+                      {constants.textDecoration.map(td => (
+                        <option value={td.value} key={td.id}>
+                          {td.id}
+                        </option>
+                      ))}
                     </Select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                       <svg
@@ -145,7 +148,6 @@ function App() {
                   </div>
                 </div>
               </InputDataContainer>
-
               {/* Scale */}
               <InputDataContainer>
                 <div className="md:w-1/3">
@@ -160,26 +162,25 @@ function App() {
                     type="number"
                     value={scale}
                     onChange={e => setScale(e.target.value)}
-                    disabled={!includesTextDecoration}
+                    disabled={!includesCustomStyles}
                   />
                 </div>
               </InputDataContainer>
-
-              {/* Underline Color */}
+              {/* Scale hover */}
               <InputDataContainer>
                 <div className="md:w-1/3">
-                  <Label id="label-underline-color" htmlFor="underline-color">
-                    Underline Color
+                  <Label id="label-inline-text" htmlFor="bottom">
+                    Scale (hover)
                   </Label>
                 </div>
                 <div className="md:w-2/3">
                   <Input
-                    id="underline-color"
-                    type="text"
-                    defaultValue="red"
-                    value={underlineColor}
-                    onChange={e => setUnderlineColor(e.target.value)}
-                    disabled={!includesTextDecoration}
+                    id="bottom"
+                    type="number"
+                    step="0.01"
+                    value={scaleHover}
+                    onChange={e => setScaleHover(e.target.value)}
+                    disabled={!includesCustomStyles}
                   />
                 </div>
               </InputDataContainer>
@@ -197,11 +198,10 @@ function App() {
                     type="number"
                     value={lineHeight}
                     onChange={e => setLineHeight(e.target.value)}
-                    disabled={!includesTextDecoration}
+                    disabled={!includesCustomStyles}
                   />
                 </div>
               </InputDataContainer>
-
               {/* Bottom */}
               <InputDataContainer>
                 <div className="md:w-1/3">
@@ -215,26 +215,22 @@ function App() {
                     type="number"
                     value={bottom}
                     onChange={e => setBottom(e.target.value)}
-                    disabled={!includesTextDecoration}
+                    disabled={!includesCustomStyles}
                   />
                 </div>
               </InputDataContainer>
 
-              {/* Scale hover */}
+              {/* Underline Color */}
               <InputDataContainer>
                 <div className="md:w-1/3">
-                  <Label id="label-inline-text" htmlFor="bottom">
-                    Scale (hover)
+                  <Label id="label-underline-color" htmlFor="underline-color">
+                    Underline Color
                   </Label>
                 </div>
                 <div className="md:w-2/3">
-                  <Input
-                    id="bottom"
-                    type="number"
-                    step="0.01"
-                    value={scaleHover}
-                    onChange={e => setScaleHover(e.target.value)}
-                    disabled={!includesTextDecoration}
+                  <SliderPicker
+                    color={underlineColor}
+                    onChange={c => setUnderlineColor(c.hex)}
                   />
                 </div>
               </InputDataContainer>
@@ -253,7 +249,7 @@ function App() {
                     step="0.5"
                     value={rotation}
                     onChange={e => setRotation(e.target.value)}
-                    disabled={!includesTextDecoration}
+                    disabled={!includesCustomStyles}
                   />
                 </div>
               </InputDataContainer>

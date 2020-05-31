@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import propTypes from 'prop-types';
 import { css } from '@emotion/core';
+import constants from '../constants';
 
 const Container = styled.div`
   text-align: center;
@@ -13,10 +14,22 @@ const LinkContainer = styled.div`
   justify-content: center;
 `;
 
+const getTextDecoration = decoration => {
+  switch (decoration) {
+    case constants.textDecorationTypes.underline:
+    case constants.textDecorationTypes.underlineCustomStyle:
+      return 'underline';
+    case constants.textDecorationTypes.wavy:
+      return 'underline wavy';
+    default:
+      return 'none';
+  }
+};
+
 const Preview = ({
   text,
   fontSize,
-  textColor,
+  color,
   textDecoration,
   scale,
   lineHeight,
@@ -24,17 +37,11 @@ const Preview = ({
   bottom,
   scaleHover,
   rotation,
+  customStyles,
 }) => {
-  const dynamicStyles = () => css`
-    --scaleX: ${scale};
-    --rotate: ${rotation}deg;
-
-    color: ${textColor};
-    font-size: ${fontSize}px;
-    text-decoration: ${textDecoration};
-    position: relative;
-
-    &:before {
+  let customStyle = null;
+  if (customStyles) {
+    customStyle = `&:before {
       position: absolute;
       content: '';
       width: 100%;
@@ -44,12 +51,23 @@ const Preview = ({
       background: ${underlineColor};
       bottom: ${bottom}px;
       transform: skew(-20deg) rotate(var(--rotate)) scaleX(var(--scaleX));
-      //transform: skew(-20deg) rotate(${rotation}deg) scaleX(var(--scaleX));
     }
 
     &:hover {
       --scaleX: ${scaleHover};
-    }
+    }`;
+  }
+  const dynamicStyles = () => css`
+    --scaleX: ${scale};
+    --rotate: ${rotation}deg;
+
+    color: ${color};
+    font-size: ${fontSize}px;
+    text-decoration: ${getTextDecoration(textDecoration)};
+    position: relative;
+    cursor: pointer;
+
+    ${customStyle}
   `;
 
   const Link = styled.a`
@@ -68,20 +86,21 @@ const Preview = ({
 Preview.propTypes = {
   text: propTypes.string.isRequired,
   fontSize: propTypes.number.isRequired,
-  textColor: propTypes.string,
+  color: propTypes.string,
   textDecoration: propTypes.string,
   scale: propTypes.number,
-  lineHeight: propTypes.string,
+  lineHeight: propTypes.number,
   underlineColor: propTypes.string,
-  bottom: propTypes.string,
+  bottom: propTypes.number,
   scaleHover: propTypes.number,
-  rotation: propTypes.string,
+  rotation: propTypes.number,
+  customStyles: propTypes.bool.isRequired,
 };
 
 Preview.defaultProps = {
-  textColor: 'black',
+  color: '#000',
   textDecoration: 'underline',
-  underlineColor: 'black',
+  underlineColor: '#000',
   scale: null,
   lineHeight: null,
   bottom: null,
