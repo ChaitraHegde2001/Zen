@@ -7,10 +7,19 @@ import constants from '../constants';
 const Container = styled.div`
   height: 100%;
   text-align: center;
+  padding: 12px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 32px;
 `;
 
 const LinkContainer = styled.div`
-  margin-top: 8px;
+  margin-top: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,6 +49,7 @@ const Preview = ({
   scaleHover,
   rotation,
   customStyles,
+  children,
 }) => {
   let customStyle = null;
   if (customStyles) {
@@ -78,10 +88,12 @@ const Preview = ({
 
   return (
     <Container>
-      <h2>Preview</h2>
+      <h2 className="font-bold text-lg text-blue-700">Preview</h2>
       <LinkContainer>
         <Link>{text}</Link>
       </LinkContainer>
+
+      <ButtonContainer>{children}</ButtonContainer>
     </Container>
   );
 };
@@ -97,6 +109,7 @@ Preview.propTypes = {
   scaleHover: propTypes.number,
   rotation: propTypes.number,
   customStyles: propTypes.bool.isRequired,
+  children: propTypes.object.isRequired,
 };
 
 Preview.defaultProps = {

@@ -41,7 +41,7 @@ function App() {
       <Header />
       <div className="flex flex-wrap">
         {/* Preview */}
-        <div className="w-full sm:w-full md:w-1/2 pb-10">
+        <div className="w-full sm:w-full md:w-1/2 pb-10 text-center mx-auto">
           <Preview
             text={text}
             fontSize={fontSize}
@@ -54,12 +54,51 @@ function App() {
             rotation={rotation}
             color={color}
             customStyles={includesCustomStyles}
-          />
+          >
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+            >
+              Copy to clipboard 📝
+            </button>
+          </Preview>
         </div>
 
         {/* Generated Code */}
-        <div className="w-full sm:w-full md:w-1/2 pd-4 bg-blue-100">
-          GENERATED CODE
+        <div className="code-preview w-full sm:w-full md:w-1/2 pd-4">
+          <pre className="code code-css rounded-lg">
+            <code id="code">
+              {`
+              a {
+                --scaleX: ${scale};
+                --rotate: ${rotation}deg;
+                color: ${color};
+                font-size: ${fontSize}px;
+                text-decoration: underline;
+                position: relative;
+                cursor: pointer;
+              }
+
+              &:hover {
+                --scaleX: ${scaleHover};
+              }
+
+              a {
+                --scaleX: ${scale};
+                --rotate: ${rotation}deg;
+                color: ${color};
+                font-size: ${fontSize}px;
+                text-decoration: underline;
+                position: relative;
+                cursor: pointer;
+              }
+
+              &:hover {
+                --scaleX: ${scaleHover};
+              }
+              `}
+            </code>
+          </pre>
         </div>
 
         {/* Settings */}
