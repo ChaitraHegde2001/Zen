@@ -16,7 +16,9 @@ const Container = styled.header`
 const Header = () => (
   <Container>
     <img src={logo} alt="fabricio duarte logo" width="32" height="32" />
-    <h1 className="ml-2 text-lg font-semibold text-blue-600">Link generator</h1>
+    <h1 className="ml-2 text-lg font-semibold text-blue-600">
+      Link style generator
+    </h1>
     <a href="https://github.com/FabDuarte/link-generator">
       <img src={github} alt="github logo" width="32" height="32" />
     </a>

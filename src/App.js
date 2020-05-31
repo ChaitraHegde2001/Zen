@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { SliderPicker } from 'react-color';
 import Preview from './components/LinkPreview';
 import Header from './components/Header';
-import About from './components/About';
+import { CopyToClipboard } from './components/CopyToClipboard';
+import { Footer } from './components/Footer';
 import constants from './constants';
 import { cssGenerator } from './utils/cssGenerator';
 import {
@@ -63,13 +64,13 @@ function App() {
     setCopyButtonText('Copied! 😊');
     setTimeout(() => {
       setCopyButtonText(copyButtonText);
-    }, 3000);
+    }, 1500);
   };
 
   return (
     <>
       <Header />
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap flex-grow mb-12">
         {/* Preview */}
         <div className="w-full sm:w-full md:w-1/2 pb-10 text-center mx-auto">
           <Preview
@@ -84,20 +85,18 @@ function App() {
             rotation={rotation}
             color={color}
             customStyles={includesCustomStyles}
-          >
-            <button
-              type="button"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-              onClick={copyToClipboard}
-            >
-              {copyButtonText}
-            </button>
-          </Preview>
+          />
         </div>
 
         {/* Generated Code */}
         <div className="code-preview w-full sm:w-full md:w-1/2 pd-4">
           <pre className="code code-css rounded-lg">
+            <CopyToClipboard
+              type="button"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+              onClickHandler={copyToClipboard}
+              text={copyButtonText}
+            />
             <code id="code" ref={codeEl}>
               {`a {${generatedCode}
 }
@@ -300,11 +299,10 @@ function App() {
             </div>
           </>
         </div>
-
-        {/* About */}
-        <div className="w-full sm:w-full md:w-1/2 pb-10 text-center mx-auto">
-          <About />
-        </div>
+      </div>
+      {/* About */}
+      <div className="bottom-0 w-full sm:w-full md:w-1/2 fixed text-center mx-auto">
+        <Footer />
       </div>
     </>
   );
