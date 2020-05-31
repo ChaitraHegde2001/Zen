@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { SliderPicker } from 'react-color';
 import Preview from './components/LinkPreview';
 import Header from './components/Header';
+import About from './components/About';
 import constants from './constants';
 import { cssGenerator } from './utils/cssGenerator';
 import {
@@ -13,10 +14,14 @@ import {
 } from './components/styles';
 import './App.css';
 
+const copyText = 'Copy to clipboard 📝';
+
 function App() {
   // State
+  const [copyButtonText, setCopyButtonText] = useState(copyText);
+
   // General settings
-  const [text, setText] = useState('Hello World!');
+  const [text, setText] = useState('This is a link!');
   const [fontSize, setFontSize] = useState(35);
   const [color, setColor] = useState('#2774c3');
 
@@ -30,6 +35,8 @@ function App() {
   const [bottom, setBottom] = useState(2);
   const [scaleHover, setScaleHover] = useState(1.15);
   const [rotation, setRotation] = useState(-2);
+
+  const codeEl = useRef(null);
 
   const includesCustomStyles =
     [
@@ -49,6 +56,15 @@ function App() {
     scaleHover,
     includesCustomStyles
   );
+
+  const copyToClipboard = () => {
+    const el = codeEl;
+    navigator.clipboard.writeText(el.current.innerText);
+    setCopyButtonText('Copied! 😊');
+    setTimeout(() => {
+      setCopyButtonText(copyButtonText);
+    }, 3000);
+  };
 
   return (
     <>
@@ -72,8 +88,9 @@ function App() {
             <button
               type="button"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+              onClick={copyToClipboard}
             >
-              Copy to clipboard 📝
+              {copyButtonText}
             </button>
           </Preview>
         </div>
@@ -81,7 +98,7 @@ function App() {
         {/* Generated Code */}
         <div className="code-preview w-full sm:w-full md:w-1/2 pd-4">
           <pre className="code code-css rounded-lg">
-            <code id="code">
+            <code id="code" ref={codeEl}>
               {`a {${generatedCode}
 }
              `}
@@ -282,6 +299,11 @@ function App() {
               </InputDataContainer>
             </div>
           </>
+        </div>
+
+        {/* About */}
+        <div className="w-full sm:w-full md:w-1/2 pb-10 text-center mx-auto">
+          <About />
         </div>
       </div>
     </>
