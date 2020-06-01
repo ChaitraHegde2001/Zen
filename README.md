@@ -2,6 +2,8 @@
 
 Easily preview, edit and generate link styles with CSS output
 
+Demo: https://link-style-generator.netlify.app/
+
 ![link generator screenshot](https://i.imgur.com/WDmBQkn.png "Link generator screenshot")
 
 ### Installation
